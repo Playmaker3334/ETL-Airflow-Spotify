@@ -1,0 +1,37 @@
+# Spotify ETL Pipeline Configuration
+
+# Spotify API credentials
+spotify:
+  client_id: "8bbb7cf9c94c45ca9f47a893988ba6d6"  # Replace with your API key or use env variables
+  client_secret: "0c9403ce694442a8b8268d46aa28f11e"  # Replace with your API secret or use env variables
+
+# Output configuration
+output:
+  format: "csv"  # csv or parquet
+  prefix: "spotify"
+
+# Data paths
+paths:
+  base: "./data"
+  raw: "./data/raw"
+  processed: "./data/processed"
+  final: "./data/final"
+
+# Extraction parameters
+parameters:
+  country: "US"  # Country code for Spotify market
+  limit: 10  # Number of items to retrieve (max 50)
+  categories: 
+    enabled: true
+    limit: 20
+
+# Transformation options
+transformations:
+  merge_tracks_features: true
+  add_derived_features: true
+
+# Logging configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "./logs/spotify_etl.log"
